@@ -31,7 +31,8 @@ $(document).ready(function() {
                 var error = data.responseJSON;
                 $('#error_msg').empty();
                 $.each(error.errors, function(key, value) {
-                    $('#error_msg').append('<p>' + value + '</p>');
+                    $('#error_msg').append('<div class="alert alert-danger alert-block"> <button type="button" class="close" data-dismiss="alert">×</button>' +
+                        value + '</div>');
                 });
             }
         });
