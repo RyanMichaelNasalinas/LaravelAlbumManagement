@@ -19,6 +19,11 @@ class ImageController extends Controller
     }
 
     public function store(Request $request) {
+        //Validate form
+        $this->validate($request,[
+            'album_name' => 'required|min:3|max:50',
+            'image' => 'required'
+        ]);
         //Create album name 
         $album = Album::create(['name' => $request->get('album_name')]);
 
@@ -32,6 +37,9 @@ class ImageController extends Controller
                 ]);
             }   
         }
-        return redirect('/album')->with('success','Album Successfully Created');
+        return ' <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>	
+                        <strong>Succesfully Uploaded Album</strong>
+                    </div>';
     }
 }

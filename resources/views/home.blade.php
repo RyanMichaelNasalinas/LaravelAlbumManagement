@@ -4,20 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            {{-- Show Success Message --}}
-            <div class="success_msg">
-                @if($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
-	                <button type="button" class="close" data-dismiss="alert">×</button>	
-                    <strong>{{ $message }}</strong>
+                <div class="success_msg">
                 </div>
-                @endif
-            </div>
+                <div id="error_msg"></div>
+
             <div class="card">
                 <form action="{{ route('album.store') }}" method="POST" enctype="multipart/form-data"
-                id="#form_upload_img">
+                id="form_upload_img">
                 @csrf
-                
+                    {{-- Show Success Message --}}
+        
                 <div class="card-body">
                     <div class="form-group">
                         <label class="font-weight-bold">Album Name</label>
