@@ -9,7 +9,5 @@ class Image extends Model
 {
     protected $fillable = ['name','album_id'];
 
-    public function images() {
-        return $this->hasMany(Image::class);
-    }
+  
 }

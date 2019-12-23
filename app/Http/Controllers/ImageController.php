@@ -12,10 +12,20 @@ class ImageController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
+    //Show all albums
+    public function album() {
+        $albums = Album::with('images')->get();
+        return view('gallery',compact('albums'));
+    }
 
     public function index() {
         $images = Image::get();
         return view('home',compact('images'));
+    }
+
+    public function show($id) {
+        $albums = Album::findOrFail($id);
+        return view('gallery-images',compact('albums'));
     }
 
     public function store(Request $request) {
@@ -41,5 +51,10 @@ class ImageController extends Controller
                         <button type="button" class="close" data-dismiss="alert">×</button>	
                         <strong>Succesfully Uploaded Album</strong>
                 </div>';
+    }
+
+    public function destroy($id) {
+       $album = Image::where('id',$id)->delete();
+        return  redirect('/')->with('message','Image Deleted Successfully');
     }
 }
