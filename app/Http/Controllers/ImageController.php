@@ -54,7 +54,10 @@ class ImageController extends Controller
     }
 
     public function destroy($id) {
-       $album = Image::where('id',$id)->delete();
-        return  redirect('/')->with('message','Image Deleted Successfully');
+        $image = Image::findOrFail($id);
+        $filename = $image->name;
+        $image->delete();
+        \Storage::delete('public/'.$filename);
+        return  redirect()->back()->with('message','Image Deleted Successfully');
     }
 }

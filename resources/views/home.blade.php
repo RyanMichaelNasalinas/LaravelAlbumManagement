@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-                <div class="success_msg">
-                </div>
-                <div id="error_msg"></div>
-
+                {{-- Display Messages  --}}
+                    <div class="success_msg"></div>
+                    <div id="error_msg"></div>
+                {{-- End Messages --}}
             <div class="card">
                 <form action="{{ route('album.store') }}" method="POST" enctype="multipart/form-data"
                 id="form_upload_img">
@@ -15,7 +15,8 @@
                     {{-- Show Success Message --}}
         
                 <div class="card-body">
-                    <div class="form-group">
+                    <a href="/">Back</a>
+                    <div class="form-group mt-3">
                         <label class="font-weight-bold">Album Name</label>
                         <input type="text" name="album_name" id="" class="form-control">
                     </div> 
