@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2019 at 05:53 AM
+-- Generation Time: Dec 29, 2019 at 02:29 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -31,17 +31,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `albums` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `albums`
---
-
-INSERT INTO `albums` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(2, 'Twenty One Pilots', '2019-12-22 18:55:41', '2019-12-22 18:55:41'),
-(3, 'Bone Collections', '2019-12-22 20:36:29', '2019-12-22 20:36:29');
 
 -- --------------------------------------------------------
 
@@ -56,13 +49,6 @@ CREATE TABLE `images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `name`, `album_id`, `created_at`, `updated_at`) VALUES
-(4, 'uploads/Ze4KThh73ueRR849wRKrCW36wMfSy8VKk0He9wOR.jpeg', 3, '2019-12-22 20:36:29', '2019-12-22 20:36:29');
 
 -- --------------------------------------------------------
 
@@ -110,6 +96,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -119,8 +106,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Mr.One', 'one@email.com', NULL, '$2y$10$enyOEJKXzmPE6IJnhTevceS8QCMlmYNmDAl89Mk9sRhtirkXo00Wu', NULL, '2019-12-22 05:17:28', '2019-12-22 05:17:28');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `user_type`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@email.com', NULL, '$2y$10$fyuinvSY8tHggPJAZt7lAuhjTS1chtmkzuR.1/mkMgXEv/EJ/zL3.', 'admin', NULL, '2019-12-29 05:27:17', '2019-12-29 05:27:17');
 
 --
 -- Indexes for dumped tables
@@ -165,13 +152,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`

@@ -60,4 +60,37 @@ class ImageController extends Controller
         \Storage::delete('public/'.$filename);
         return  redirect()->back()->with('message','Image Deleted Successfully');
     }
+
+    public function addImage(Request $request) {
+          $this->validate($request,[
+            'image' => 'required'
+        ]);
+        $album_id = request('album_id');
+        //Loop all the image[] as array
+        if($request->hasFile('image')) {
+            foreach($request->file('image') as $image) {
+                $path = $image->store('uploads','public');
+                Image::create([
+                    'name' => $path,
+                    'album_id' => $album_id  //Get the value of the hiddend input id
+                ]);
+            }        
+        }
+        return redirect()->back()->with('message','Image Added Successfully');
+    }
+
+    public function albumCover(Request $request) {
+            $this->validate($request,[
+                'image' => 'required'
+            ]);
+            $album_id = request('album_id');
+            if($request->hasFile('image')) {
+                    $file = $request->file('image');
+                    $path = $file->store('uploads','public');
+                    Album::where('id',$album_id)->update([
+                        'image' => $path
+                ]);
+            }
+        return redirect()->back()->with('message','Image Updated Successfully');    
+    }
 }

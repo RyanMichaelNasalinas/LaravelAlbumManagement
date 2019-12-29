@@ -17,5 +17,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/album','ImageController@index');
 Route::post('/album','ImageController@store')->name('album.store');
+Route::post('/album/image','ImageController@addImage')->name('album.image');
 Route::get('albums/{id}','ImageController@show');
 Route::delete('albums/{id}','ImageController@destroy');
+Route::post('/album/image_cover','ImageController@albumCover')->name('album.image.cover');
