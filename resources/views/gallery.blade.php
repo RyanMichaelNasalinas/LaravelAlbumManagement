@@ -4,9 +4,11 @@
 
 <div class="container">
   <div class="row">
+            @if(Auth::check() && Auth::user()->user_type == 'admin')
             <div class="ml-3">
                 <a href="/album">Add Album</a>
             </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12">
@@ -35,10 +37,10 @@
                         <a href="albums/{{ $album->id }}" class="centered">{{ $album->name }}</a>
                     </div>
                
-                @if(Auth::check())
+                @if(Auth::check() && Auth::user()->user_type == 'admin')
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#album_pic{{ $album->id }}">
-                    Album Image
+                    Change Album Image
                 </button>
                 @endif
 

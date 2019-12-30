@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Image;
 use App\Album;
+use Image as InterventionImage;
 
 class ImageController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('admin',
+            ['only' => ['index','addImage','store','destroy','albumCover']
+        ]);
     }
     //Show all albums
     public function album() {
@@ -69,9 +72,11 @@ class ImageController extends Controller
         //Loop all the image[] as array
         if($request->hasFile('image')) {
             foreach($request->file('image') as $image) {
-                $path = $image->store('uploads','public');
+                // $path = $image->store('uploads','public');
+                $filename = time().'.'.$image->getClientOriginalExtension();
+                InterventionImage::make($image)->fit(300,300)->save('storage/uploads'.$filename);
                 Image::create([
-                    'name' => $path,
+                    'name' => $filename,
                     'album_id' => $album_id  //Get the value of the hiddend input id
                 ]);
             }        

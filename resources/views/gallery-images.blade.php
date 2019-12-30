@@ -10,6 +10,7 @@
                 <strong>{{Session::get('message')}}</strong>
             </div>
          @endif
+         @if(Auth::check() && Auth::user()->user_type == 'admin')
          <div class="row mb-3">
             <div class="col-md-12 d-flex justify-content-end">
                 <!-- Button trigger modal -->
@@ -18,19 +19,22 @@
                 </button>
             </div>
          </div>
+         @endif
     <h1 class="text-center">{{ $albums->name}}<b>({{$albums->images->count()}})</b></h1> 
     <div class="row">
         @if($albums->images->count() > 0) 
             @foreach($albums->images as $album) {{-- fetch data using relatrionship $albums->images --}}
             <div class="col-sm-4 col-md-4 d-block mx-auto">
                 <div class="item">
-                    <img src="{{ asset('storage/'.$album->name) }}" alt="" class="img-fluid img-thumbnail">
+                    <img src="{{ asset('storage/uploads'.$album->name) }}" alt="" class="img-fluid img-thumbnail">
                 </div>
                
+                @if(Auth::check() && Auth::user()->user_type == 'admin')
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                     Delete
                 </button>
+                @endif
 
                 <!-- Delete Image Modal Confirmation -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
