@@ -74,7 +74,7 @@ class ImageController extends Controller
             foreach($request->file('image') as $image) {
                 // $path = $image->store('uploads','public');
                 $filename = time().'.'.$image->getClientOriginalExtension();
-                InterventionImage::make($image)->fit(300,300)->save('storage/uploads'.$filename);
+                InterventionImage::make($image)->fit(600,600)->save('storage/uploads'.$filename);
                 Image::create([
                     'name' => $filename,
                     'album_id' => $album_id  //Get the value of the hiddend input id
