@@ -24,7 +24,6 @@
                 <label class="font-weight-bold">Upload Image(s)</label>
                 <div class="input-group control-group add-img">
                     <input type="file" name="image[]" class="form-control">
-
                     <div class="input-group-btn">
                         <button class="btn btn-success btn-add-image font-weight-bold" type="button">
                             &plus;

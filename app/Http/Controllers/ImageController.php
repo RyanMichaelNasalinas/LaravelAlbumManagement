@@ -43,9 +43,10 @@ class ImageController extends Controller
         //Loop all the image[] as array
         if($request->hasFile('image')) {
             foreach($request->file('image') as $image) {
-                $path = $image->store('uploads','public');
+                $filename = time().'.'.$image->getClientOriginalExtension();
+                InterventionImage::make($image)->fit(600,600)->save('storage/uploads'.$filename);
                 Image::create([
-                    'name' => $path,
+                    'name' =>  $filename ,
                     'album_id' => $album->id //Get the last inserted id in album class
                 ]);
             }   
@@ -90,10 +91,11 @@ class ImageController extends Controller
             ]);
             $album_id = request('album_id');
             if($request->hasFile('image')) {
-                    $file = $request->file('image');
-                    $path = $file->store('uploads','public');
+                    $image = $request->file('image');
+                    $filename = time() . '.' . $image->getClientOriginalExtension();
+                    InterventionImage::make($image)->fit(600, 600)->save('storage/uploads' . $filename);
                     Album::where('id',$album_id)->update([
-                        'image' => $path
+                        'image' => $filename
                 ]);
             }
         return redirect()->back()->with('message','Image Updated Successfully');    
